@@ -72,7 +72,7 @@ const Hero = ({ onBookDemo }) => {
             transition: 'opacity 1s ease-in'
           }}
         >
-          <source src="/Assets/Video 1.mp4" type="video/mp4" />
+          <source src="/Assets/video 1.mp4" type="video/mp4" />
         </video>
       </Box>
 
