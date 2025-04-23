@@ -92,7 +92,7 @@ const Benefits = () => {
             >
               <Box
                 component="img"
-                src="/Assets/Analytics dashboard.png"
+                src="/Assets/AnalyticsDashboard.png"
                 alt="Dashboard Preview"
                 sx={{
                   width: '100%',

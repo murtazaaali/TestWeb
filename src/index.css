@@ -1,3 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans;
+    color: #1a1a1a;
+    background: white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-normal;
+    color: #1a1a1a;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn-primary {
+    @apply text-white px-6 py-2 rounded-lg transition-colors duration-300;
+    background: linear-gradient(135deg, #7ca0da 0%, #a8c4f0 100%);
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #6a8fc4 0%, #95b3e0 100%);
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-8;
+    color: #1a1a1a;
+  }
+  
+  .card {
+    @apply rounded-lg shadow-lg p-6;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #1a1a1a;
+  }
+
+  .section {
+    @apply py-12;
+    background: #f0f0f0;
+    color: #1a1a1a;
+  }
+
+  .hero-section {
+    @apply w-full;
+    background: #f5f5f5;
+    color: #1a1a1a;
+  }
+
+  .fade-in {
+    color: #1a1a1a;
+  }
+
+  /* Navbar styles */
+  .navbar-logo {
+    @apply w-auto object-contain;
+    /* Mobile first approach */
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .navbar-logo {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .navbar-logo {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .social-icon {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  .social-icon:hover {
+    @apply transform -translate-y-1;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +106,49 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  overflow: visible;
+  padding: 60px 0;
+  margin: 0 -150px;
+}
+
+.carousel-container::before,
+.carousel-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgb(255,255,255) 0%, rgba(255,255,255,0) 100%);
+}
+
+.carousel-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgb(255,255,255) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Override default slick carousel styles */
+.slick-track {
+  display: flex !important;
+  align-items: center !important;
+  padding: 20px 0;
+}
+
+.slick-slide {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 -10px;
+}
+
+.slick-slide > div {
+  padding: 30px;
 }
