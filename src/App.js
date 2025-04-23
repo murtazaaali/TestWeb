@@ -12,8 +12,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import BookDemo from './components/BookDemo';
-// import ErrorPage from './components/ErrorPage';
-// import ErrorBoundary from './components/ErrorBoundary';
+import ErrorPage from './components/ErrorPage';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 const theme = createTheme({
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -113,9 +113,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <ErrorBoundary> */}
+      <ErrorBoundary>
         <RouterProvider router={router} />
-      {/* </ErrorBoundary> */}
+      </ErrorBoundary>
     </ThemeProvider>
   );
 }
