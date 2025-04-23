@@ -3,14 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "@emailjs/browser": "^4.4.1",
+    "@emotion/react": "11.11.3",
+    "@emotion/styled": "11.11.0",
+    "@mui/icons-material": "5.15.10",
+    "@mui/material": "5.15.10",
+    "framer-motion": "^11.0.8",
+    "gsap": "^3.12.5",
+    "react": "^18.2.0",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-slick": "^0.30.3",
+    "react-type-animation": "^3.2.0",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^4.2.4"
+  },
+  "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
+    "html-webpack-plugin": "^5.5.0",
+    "react-refresh": "^0.17.0",
+    "source-map-loader": "^3.0.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,5 +53,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+   
+
   }
 }
