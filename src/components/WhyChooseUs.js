@@ -4,7 +4,7 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import ContactsIcon from '@mui/icons-material/Contacts';
 
-const WhyChooseUs = () => {
+const WhyChooseUs = ({ onBookDemo }) => {
   const features = [
     {
       icon: <NoteAddIcon sx={{ fontSize: 24 }} />,
@@ -113,19 +113,33 @@ const WhyChooseUs = () => {
 
           <Grid 
             container 
-            spacing={{ xs: 2, sm: 3 }}
+            spacing={{ xs: 4, sm: 6 }}
             justifyContent="center"
+            alignItems="center"
             sx={{
-              maxWidth: '900px',
-              margin: '0 auto'
+              maxWidth: '1200px',
+              margin: '0 auto',
+              px: { xs: 2, sm: 4 }
             }}
           >
             {features.map((feature, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={4} 
+                key={index}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
                 <Card
+                  onClick={onBookDemo}
                   sx={{
-                    width: { xs: '100%', sm: '280px' },
-                    height: { xs: '70px', sm: '80px' },
+                    width: '100%',
+                    maxWidth: '320px',
+                    height: { xs: '80px', sm: '90px' },
                     display: 'flex',
                     alignItems: 'center',
                     borderRadius: '16px',
@@ -133,8 +147,7 @@ const WhyChooseUs = () => {
                     backgroundColor: '#F8FAFC',
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     boxShadow: 'none',
-                    px: { xs: 2, sm: 3 },
-                    mx: 'auto',
+                    px: { xs: 3, sm: 4 },
                     cursor: 'pointer',
                     position: 'relative',
                     overflow: 'hidden',

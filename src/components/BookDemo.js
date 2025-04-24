@@ -14,14 +14,19 @@ import {
   Snackbar,
   Alert,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Slide
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import ReCAPTCHA from 'react-google-recaptcha';
 import emailjs from '@emailjs/browser';
 
 // Initialize EmailJS
 emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual public key
+
+// Define the Transition component
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-paper': {
@@ -59,7 +64,6 @@ const BookDemo = ({ open, onClose }) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -71,15 +75,6 @@ const BookDemo = ({ open, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!recaptchaValue) {
-      setSnackbar({
-        open: true,
-        message: 'Please complete the reCAPTCHA verification',
-        severity: 'error'
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     
     try {
@@ -95,7 +90,6 @@ Name: ${formData.name}
 Email: ${formData.email}
 WhatsApp: ${formData.whatsapp}
 Interested Product: ${formData.product}`,
-        g_recaptcha_response: recaptchaValue
       };
 
       await emailjs.send(
@@ -117,7 +111,6 @@ Interested Product: ${formData.product}`,
         whatsapp: '',
         product: '',
       });
-      setRecaptchaValue(null);
 
       // Close dialog after a short delay
       setTimeout(() => {
@@ -136,10 +129,6 @@ Interested Product: ${formData.product}`,
     }
   };
 
-  const handleRecaptchaChange = (value) => {
-    setRecaptchaValue(value);
-  };
-
   const handleSnackbarClose = () => {
     setSnackbar({ ...snackbar, open: false });
   };
@@ -149,6 +138,9 @@ Interested Product: ${formData.product}`,
       <StyledDialog
         open={open}
         onClose={onClose}
+        TransitionComponent={Transition}
+        keepMounted
+        aria-describedby="alert-dialog-slide-description"
         maxWidth="sm"
         fullWidth
       >
@@ -276,26 +268,20 @@ Interested Product: ${formData.product}`,
                 </TextField>
               </Box>
 
-              <Box sx={{ mb: 3 }}>
-                <ReCAPTCHA
-                  sitekey="YOUR_RECAPTCHA_SITE_KEY"
-                  onChange={handleRecaptchaChange}
-                />
-              </Box>
-
               <DialogActions sx={{ px: 0, pb: 0 }}>
                 <Button
                   type="submit"
                   variant="contained"
                   fullWidth
                   size="large"
-                  disabled={isSubmitting || !recaptchaValue}
+                  disabled={isSubmitting}
                   sx={{
                     py: 2,
                     borderRadius: 2,
                     fontSize: '1.1rem',
                     textTransform: 'none',
                     background: 'linear-gradient(135deg, #2E1F47 0%, #443365 100%)',
+                    color: '#ffffff',
                     '&:hover': {
                       background: 'linear-gradient(135deg, #443365 0%, #2E1F47 100%)',
                       transform: 'translateY(-2px)',

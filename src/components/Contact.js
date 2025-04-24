@@ -19,15 +19,15 @@ import emailjs from '@emailjs/browser';
 
 // Memoized styled components
 const ContactCard = memo(styled(Card)(({ theme }) => ({
-  height: '100%',
+  height: 'auto',
   background: '#ffffff',
-  boxShadow: 'none',
-  borderRadius: theme.spacing(3),
+  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.1)',
+  borderRadius: theme.spacing(2),
   transition: 'all 0.3s ease-in-out',
-  padding: theme.spacing(6),
-  maxWidth: '600px',
+  padding: theme.spacing(4),
+  maxWidth: '500px',
   margin: '0 auto',
-  border: '1px solid #eef2f6',
+  border: 'none',
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3),
   },
@@ -45,75 +45,87 @@ const StyledInputLabel = memo(styled(InputLabel)(({ theme }) => ({
 
 const StyledTextField = memo(styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
-    borderRadius: theme.spacing(3),
+    borderRadius: theme.spacing(1),
     backgroundColor: '#ffffff',
     transition: 'all 0.3s ease',
     border: '1px solid #e2e8f0',
-    maxWidth: '450px',
-    margin: '0 auto',
+    width: '100%',
+    marginTop: '8px',
     '&:hover': {
       borderColor: '#2E1F47',
-      backgroundColor: '#f8fafc',
     },
     '&.Mui-focused': {
       backgroundColor: '#ffffff',
       borderColor: '#2E1F47',
+      boxShadow: '0 0 0 1px #2E1F47',
     },
     '&.Mui-error': {
       borderColor: '#ef4444',
+      boxShadow: 'none',
     },
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none',
     },
   },
   '& .MuiInputLabel-root': {
-    fontSize: '0.95rem',
+    position: 'relative',
+    transform: 'none',
+    fontSize: '0.9rem',
     fontWeight: 500,
-    color: '#94a3b8',
-    transform: 'translate(14px, -12px) scale(0.75)',
-    backgroundColor: '#ffffff',
-    padding: '0 8px',
+    color: '#1E293B',
+    marginBottom: '4px',
+    '&.MuiInputLabel-shrink': {
+      transform: 'none',
+      backgroundColor: 'transparent',
+      padding: 0,
+    },
     '&.Mui-focused': {
       color: '#2E1F47',
     },
     '&.Mui-error': {
       color: '#ef4444',
     },
-    '& .required': {
+    '& .MuiFormLabel-asterisk': {
       color: '#ef4444',
       marginLeft: '2px',
-    },
+    }
   },
   '& .MuiOutlinedInput-input': {
-    padding: '16px 20px',
-    fontSize: '1rem',
-    color: '#475569',
+    padding: '12px 16px',
+    fontSize: '0.9rem',
+    color: '#1E293B',
     '&::placeholder': {
       color: '#94a3b8',
       opacity: 1,
     },
   },
   '& .MuiFormHelperText-root': {
-    marginLeft: '20px',
+    marginLeft: '4px',
+    marginTop: '4px',
     color: '#ef4444',
+    fontSize: '0.75rem',
   },
 })));
 
 const SubmitButton = memo(styled(Button)(({ theme }) => ({
-  borderRadius: theme.spacing(3),
-  padding: '16px 48px',
-  fontSize: '1.1rem',
+  borderRadius: theme.spacing(1),
+  padding: '12px 0',
+  fontSize: '1rem',
   fontWeight: 500,
   textTransform: 'none',
   backgroundColor: '#2E1F47',
+  color: '#ffffff',
   boxShadow: 'none',
   transition: 'all 0.3s ease',
-  marginTop: theme.spacing(6),
+  width: '100%',
+  marginTop: theme.spacing(3),
   '&:hover': {
     backgroundColor: '#443365',
-    boxShadow: '0 6px 20px rgba(46, 31, 71, 0.2)',
-    transform: 'translateY(-2px)',
+    color: '#ffffff',
   },
+  '& .MuiButton-label': {
+    color: '#ffffff',
+  }
 })));
 
 // Memoize the products array
@@ -244,71 +256,61 @@ const Contact = memo(() => {
 
   return (
     <Box component="section" id="contact" sx={{ 
-      py: 12,
+      py: 6,
       background: '#ffffff',
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
     }}>
       <Container maxWidth="lg">
-        <Box sx={{ mb: 8, textAlign: 'center' }}>
+        <Box sx={{ mb: 4, textAlign: 'center' }}>
           <Typography 
-            variant="h2" 
+            variant="h3" 
             component="h2" 
             gutterBottom
             sx={{
-              fontWeight: 700,
-              fontSize: { xs: '2.5rem', md: '3.5rem' },
-              background: 'linear-gradient(135deg, #2E1F47 0%, #443365 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              mb: 3,
+              fontWeight: 600,
+              fontSize: { xs: '1.75rem', md: '2rem' },
+              color: '#2E1F47',
+              mb: 2,
             }}
           >
-            Contact our Sales Team!
+            Book a Demo
           </Typography>
           <Typography 
-            variant="h6" 
+            variant="body1" 
             sx={{ 
-              maxWidth: '600px', 
+              maxWidth: '500px', 
               mx: 'auto',
               color: '#64748B',
-              fontSize: '1.1rem',
-              lineHeight: 1.6,
-              mb: 6,
+              fontSize: '1rem',
+              lineHeight: 1.5,
+              mb: 4,
             }}
           >
-            If you have inquiry about the product feel free to contact.
+            Experience the power of our solutions firsthand
           </Typography>
         </Box>
 
         <Grid container justifyContent="center">
-          <Grid item xs={12} md={10}>
+          <Grid item xs={12} sm={10} md={8}>
             <ContactCard>
               <form onSubmit={handleSubmit}>
-                <Grid 
-                  container 
-                  spacing={4} 
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
+                <Grid container spacing={2.5}>
                   <Grid item xs={12} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <StyledTextField
                       fullWidth
                       required
                       name="name"
-                      label="Your Name *"
+                      label="Full Name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Enter your name"
                       error={!!errors.name}
                       helperText={errors.name}
-                      InputLabelProps={{ 
+                      variant="outlined"
+                      InputLabelProps={{
                         shrink: true,
-                        required: true
+                        required: true,
                       }}
                     />
                   </Grid>
@@ -318,15 +320,15 @@ const Contact = memo(() => {
                       required
                       name="email"
                       type="email"
-                      label="Your Email *"
+                      label="Email Address"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="Enter your email"
                       error={!!errors.email}
                       helperText={errors.email}
-                      InputLabelProps={{ 
+                      variant="outlined"
+                      InputLabelProps={{
                         shrink: true,
-                        required: true
+                        required: true,
                       }}
                     />
                   </Grid>
@@ -335,15 +337,15 @@ const Contact = memo(() => {
                       fullWidth
                       required
                       name="whatsapp"
-                      label="WhatsApp *"
+                      label="WhatsApp Number"
                       value={formData.whatsapp}
                       onChange={handleChange}
-                      placeholder="Enter your WhatsApp number"
                       error={!!errors.whatsapp}
                       helperText={errors.whatsapp}
-                      InputLabelProps={{ 
+                      variant="outlined"
+                      InputLabelProps={{
                         shrink: true,
-                        required: true
+                        required: true,
                       }}
                     />
                   </Grid>
@@ -353,18 +355,19 @@ const Contact = memo(() => {
                       required
                       select
                       name="product"
-                      label="Interested Service *"
+                      label="Interested Product"
                       value={formData.product}
                       onChange={handleChange}
                       error={!!errors.product}
                       helperText={errors.product}
-                      InputLabelProps={{ 
+                      variant="outlined"
+                      InputLabelProps={{
                         shrink: true,
-                        required: true
+                        required: true,
                       }}
                       SelectProps={{
                         displayEmpty: true,
-                        renderValue: (value) => value || "Select a service",
+                        renderValue: (value) => value || "Choose a service",
                         MenuProps: {
                           PaperProps: {
                             sx: {
@@ -398,14 +401,14 @@ const Contact = memo(() => {
                 <Box sx={{ 
                   display: 'flex', 
                   justifyContent: 'center',
-                  mt: 6 
+                  width: '100%',
                 }}>
                   <SubmitButton
                     type="submit"
                     variant="contained"
                     size="large"
                   >
-                    Send Message
+                    Book Demo
                   </SubmitButton>
                 </Box>
               </form>

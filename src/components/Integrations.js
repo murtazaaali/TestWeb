@@ -122,7 +122,7 @@ const integrations = [
   }
 ];
 
-const Integrations = () => {
+const Integrations = ({ onBookDemo }) => {
   return (
     <Box 
       component="section" 
@@ -191,7 +191,7 @@ const Integrations = () => {
               }}
             >
               <Fade in={true} timeout={500 + index * 100}>
-                <IntegrationItem>
+                <IntegrationItem onClick={onBookDemo}>
                   <IconWrapper className="integration-icon">
                     {integration.icon}
                   </IconWrapper>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, ThemeProvider, createTheme } from '@mui/material';
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet, useOutletContext } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import WhyChooseUs from './components/WhyChooseUs';
@@ -69,7 +69,7 @@ const RootLayout = () => {
         }}
       >
         <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Outlet />
+          <Outlet context={{ onBookDemo: handleOpenDemo }} />
         </Box>
       </Box>
       <WhatsAppButton />
@@ -78,20 +78,27 @@ const RootLayout = () => {
   );
 };
 
-const HomePage = () => (
-  <>
-    <Hero onBookDemo={() => {}} />
-    <WhyChooseUs />
-    <Benefits />
-    <Solutions />
-    <Statistics className="preserve-bg" />
-    <Integrations />
-    <Contact />
-    <Footer className="preserve-bg" />
-  </>
-);
+const HomePage = () => {
+  const { onBookDemo } = useOutletContext();
+  return (
+    <>
+      <Hero onBookDemo={onBookDemo} />
+      <WhyChooseUs onBookDemo={onBookDemo} />
+      <Benefits />
+      <Solutions onBookDemo={onBookDemo} />
+      <Statistics className="preserve-bg" />
+      <Integrations onBookDemo={onBookDemo} />
+      <Contact />
+      <Footer className="preserve-bg" />
+    </>
+  );
+};
 
-const router = createBrowserRouter([
+const HomePageWrapper = () => {
+  return <HomePage onBookDemo={() => console.log("Placeholder: Open Demo")} />;
+};
+
+const createRouterWithProps = (handleOpenDemo) => createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
@@ -111,6 +118,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const router = createRouterWithProps();
+
   return (
     <ThemeProvider theme={theme}>
       <ErrorBoundary>

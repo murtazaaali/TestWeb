@@ -32,20 +32,25 @@ const pulse = keyframes`
 
 const StyledCard = styled(Card)(({ theme }) => ({
   height: '100%',
-  minHeight: 280,
+  minHeight: 260,
+  maxHeight: 260,
   width: '100%',
+  maxWidth: 280,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   padding: theme.spacing(4),
   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  background: 'rgba(255, 255, 255, 0.9)',
+  background: '#ffffff',
   backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.3)',
+  border: '1px solid rgba(226, 232, 240, 0.8)',
+  borderRadius: '20px',
   position: 'relative',
   overflow: 'hidden',
   cursor: 'pointer',
+  margin: '0 auto',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
   
   '&::before': {
     content: '""',
@@ -60,7 +65,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 
   '&:hover': {
-    transform: 'translateY(-12px) scale(1.02)',
+    transform: 'translateY(-8px)',
     boxShadow: '0 20px 40px rgba(46, 31, 71, 0.15)',
     background: '#ffffff',
 
@@ -151,7 +156,7 @@ const industries = [
   },
 ];
 
-const Solutions = () => {
+const Solutions = ({ onBookDemo }) => {
   return (
     <Box
       id="solutions"
@@ -210,73 +215,82 @@ const Solutions = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={{ xs: 3, sm: 4 }} alignItems="stretch">
-          {industries.map((industry, index) => (
-            <Grid 
-              item 
-              xs={12} 
-              sm={6} 
-              md={4} 
-              lg={3} 
-              key={index}
-              sx={{ display: 'flex' }}
-            >
-              <Zoom in={true} style={{ transitionDelay: `${index * 100}ms`, width: '100%' }}>
-                <StyledCard elevation={0}>
-                  <IconWrapper className="icon-wrapper" sx={{ 
-                    width: { xs: 70, sm: 80, md: 90 },
-                    height: { xs: 70, sm: 80, md: 90 },
-                    borderRadius: { xs: '20px', sm: '26px' }
-                  }}>
-                    {React.cloneElement(industry.icon, { 
-                      sx: { fontSize: { xs: 35, sm: 40, md: 45 } } 
-                    })}
-                  </IconWrapper>
-                  <CardContent 
-                    className="card-content" 
-                    sx={{ 
-                      textAlign: 'center', 
-                      p: 0,
-                      transition: 'transform 0.4s ease',
-                      width: '100%'
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      sx={{
-                        mb: { xs: 1, sm: 1.5 },
-                        fontWeight: 700,
-                        fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.25rem' },
-                        color: 'text.primary',
-                        height: '1.5em',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
+        <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 4 } }}>
+          <Grid 
+            container 
+            spacing={{ xs: 4, sm: 6, md: 8 }} 
+            alignItems="stretch"
+            justifyContent="center"
+            sx={{
+              mt: 2,
+              '& .MuiGrid-item': {
+                display: 'flex',
+                justifyContent: 'center'
+              }
+            }}
+          >
+            {industries.map((industry, index) => (
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={4} 
+                lg={3} 
+                key={index}
+              >
+                <Zoom in={true} style={{ transitionDelay: `${index * 100}ms`, width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <StyledCard elevation={0} onClick={onBookDemo}>
+                    <IconWrapper className="icon-wrapper" sx={{ 
+                      width: { xs: 80, sm: 80, md: 90 },
+                      height: { xs: 80, sm: 80, md: 90 },
+                      borderRadius: '20px',
+                      mb: 3
+                    }}>
+                      {React.cloneElement(industry.icon, { 
+                        sx: { fontSize: { xs: 40, sm: 40, md: 45 } } 
+                      })}
+                    </IconWrapper>
+                    <CardContent 
+                      className="card-content" 
+                      sx={{ 
+                        textAlign: 'center', 
+                        p: 0,
+                        transition: 'transform 0.4s ease',
+                        width: '100%',
+                        mt: 'auto'
                       }}
                     >
-                      {industry.title}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: 'text.secondary',
-                        fontSize: { xs: '0.9rem', sm: '0.95rem', md: '1rem' },
-                        fontWeight: 400,
-                        height: '1.5em',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      {industry.subtitle}
-                    </Typography>
-                  </CardContent>
-                </StyledCard>
-              </Zoom>
-            </Grid>
-          ))}
-        </Grid>
+                      <Typography
+                        variant="h6"
+                        component="h3"
+                        sx={{
+                          mb: 2,
+                          fontWeight: 600,
+                          fontSize: { xs: '1.2rem', sm: '1.2rem', md: '1.25rem' },
+                          color: '#2E1F47',
+                          lineHeight: 1.3
+                        }}
+                      >
+                        {industry.title}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: '#666',
+                          fontSize: { xs: '0.95rem', sm: '0.95rem', md: '1rem' },
+                          fontWeight: 400,
+                          mb: 2
+                        }}
+                      >
+                        {industry.subtitle}
+                      </Typography>
+                    </CardContent>
+                  </StyledCard>
+                </Zoom>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </Container>
     </Box>
   );
